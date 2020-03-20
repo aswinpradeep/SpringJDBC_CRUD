@@ -8,5 +8,7 @@ public interface BUService {
 	public Object addBU(BU bu);
 	public  void deleteBU(int buid);
 	public void updateBU(int buid,String buhead);
+	public Object getJoin();
+	public void add2(int buid, String buname, String buhead);
 
 }

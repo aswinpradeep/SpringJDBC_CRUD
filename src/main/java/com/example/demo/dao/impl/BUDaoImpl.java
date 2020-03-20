@@ -102,6 +102,39 @@ System.out.println("_______________________p1="+param1);
 		
 		
 	}
+	@Override
+	public Object getJoin() {
+		List<BU> joinList = new ArrayList<>(); 
+		try {
+			joinList = jdbcTemplate.query("SELECT BU.buid, BU.buname, PROJECTS.pname,BU.buhead FROM BU INNER JOIN PROJECTS ON BU.buid=PROJECTS.buid", new RowMapper<BU>() {
+				public BU mapRow(ResultSet rs, int rowNum) throws SQLException {
+					BU bu = new BU(); 
+					bu.setBuid(rs.getInt("buid"));
+					bu.setBuname(rs.getString("buname"));
+					bu.setBuname(rs.getString("pname"));
+					bu.setBuhead(rs.getString("buhead"));
+
+					return bu;
+				}
+			});
+		}catch(Exception e) {
+			System.out.println("Error:" + e.getMessage());
+		}
+		
+		return joinList;
+	}
+	@Override
+	public void add2(int buid, String buname, String buhead) {
+		
+		Object[] param1 = { buid,buname,buhead};
+		int[] types = {Types.BIGINT,Types.VARCHAR,Types.VARCHAR,};
+
+		  int rows = jdbcTemplate.update("insert into BU values(?,?,?)", param1,types);
+ 
+  System.out.println(rows + " row(s) updated.");
+		// TODO Auto-generated method stub
+		
+	}
 
 
 

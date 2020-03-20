@@ -31,6 +31,12 @@ public class BUController {
         return buservice.addBU(bu);
     }
 	
+	@RequestMapping(value = "/add2", method = RequestMethod.POST)
+	public void add2(@RequestParam int buid,@RequestParam String buname,@RequestParam String buhead) {
+       buservice.add2(buid,buname,buhead);
+    }
+	
+	
 	@DeleteMapping(value = "/deleteBU")
 	public void deleteBU(@RequestParam int buid){
 		buservice.deleteBU(buid);
@@ -41,5 +47,13 @@ public class BUController {
 		System.out.println("djhjhfjd---------------------"+buhead);
       buservice.updateBU(buid,buhead);
     }
+	
+@RequestMapping(value = "/getJoin", method = RequestMethod.GET)
+	
+	public Object getjoin() {
+		
+		return buservice.getJoin();
+		
+	}
 
 }
